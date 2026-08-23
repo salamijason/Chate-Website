@@ -4,15 +4,7 @@
  * @module components/faq
  */
 
-const MYANMAR_SCRIPT_PATTERN = /[\u1000-\u109F]+/g;
-
-function wrapMyanmarScript(text) {
-  if (!text) return "";
-  return text.replace(
-    MYANMAR_SCRIPT_PATTERN,
-    (match) => `<span lang="my">${match}</span>`,
-  );
-}
+import { wrapMyanmarScript } from "../utils/text-utils.js";
 
 const FAQS = [
   {
@@ -78,10 +70,10 @@ function renderFAQItem(faq) {
     <div class="faq__col">
       <details class="faq__item">
         <summary class="faq__summary">
-          <h3 class="faq__question">
+          <span class="faq__question">
             ${wrapMyanmarScript(faq.question)}
             <span class="faq__highlight">${wrapMyanmarScript(faq.highlight)}</span>
-          </h3>
+          </span>
           <span class="faq__icon" aria-hidden="true"></span>
         </summary>
         <div class="faq__answer">

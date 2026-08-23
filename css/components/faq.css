@@ -12,10 +12,7 @@
 
 /* Container */
 .faq__container {
-  width: min(
-    calc(100% - (var(--container-padding) * 2)),
-    var(--container-width)
-  );
+  width: min(calc(100% - (var(--container-padding) * 2)), 900px);
   margin-inline: auto;
 }
 
@@ -32,7 +29,7 @@
 /* Grid */
 .faq__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-6);
   align-items: start;
 }
@@ -160,12 +157,6 @@
 }
 
 /* Responsive */
-@media (max-width: 991.98px) {
-  .faq__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 575.98px) {
   .faq {
     padding-block: var(--space-12);
