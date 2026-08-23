@@ -37,13 +37,13 @@ async function initVideosPage() {
   initializeSeriesController({
     defaultKey: DEFAULT_HASH,
     validKeys: VALID_HASHES,
+    series: videoSeries,
+    container: videosPanel,
+    renderSeries: renderVideoGrid,
     getButtons: () => ({
       "su-tu-pyu": document.getElementById("su-tu-pyu-button"),
       "scholars-diaries": document.getElementById("scholars-diaries-button"),
     }),
-    series: videoSeries,
-    container: videosPanel,
-    renderSeries: renderVideoGrid,
   });
 }
 
