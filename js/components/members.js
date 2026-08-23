@@ -5,6 +5,7 @@
  */
 
 import { MEMBERS } from "../data/members/index.js";
+import { mountResponsiveCarousel } from "./responsive-carousel.js";
 
 export function mountMembers() {
   const section = document.getElementById("members");
@@ -20,23 +21,15 @@ export function mountMembers() {
     </div>
   `;
 
-  initMembersCarousel();
-}
-
-function initMembersCarousel() {
-  const container = document.getElementById("members-carousel-container");
-
-  if (!container) return;
-
-  function getItemsPerSlide() {
+  const getItemsPerSlide = () => {
     const width = window.innerWidth;
     if (width <= 575.98) return 1;
     if (width <= 991.98) return 2;
     if (width <= 1199.98) return 3;
     return 4;
-  }
+  };
 
-  const renderMemberCard = (member) => `
+  const renderItem = (member) => `
     <div class="members__col">
       <div class="members__card">
         <img
@@ -56,80 +49,14 @@ function initMembersCarousel() {
       </div>
     </div>`;
 
-  const renderCarousel = (itemsPerSlide) => {
-    let slidesHTML = "";
-
-    for (let i = 0; i < MEMBERS.length; i += itemsPerSlide) {
-      const slideItems = MEMBERS.slice(i, i + itemsPerSlide)
-        .map(renderMemberCard)
-        .join("");
-
-      slidesHTML += `
-        <div class="carousel-item ${i === 0 ? "active" : ""}">
-          <div class="members__row">${slideItems}</div>
-        </div>`;
-    }
-
-    return `
-      <div
-        id="members-carousel"
-        class="carousel slide members__carousel"
-        aria-label="Team members"
-      >
-        <div class="carousel-inner">${slidesHTML}</div>
-        <a
-          class="carousel-control-prev"
-          href="#members-carousel"
-          role="button"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </a>
-        <a
-          class="carousel-control-next"
-          href="#members-carousel"
-          role="button"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </a>
-      </div>`;
-  };
-
-  let currentItemsPerSlide = getItemsPerSlide();
-  let carouselInstance = null;
-
-  function updateCarousel() {
-    if (carouselInstance) {
-      carouselInstance.dispose();
-      carouselInstance = null;
-    }
-
-    container.innerHTML = renderCarousel(currentItemsPerSlide);
-
-    const carouselEl = document.getElementById("members-carousel");
-    carouselInstance = new bootstrap.Carousel(carouselEl, {
-      interval: 5000,
-      ride: "carousel",
-      touch: true,
-    });
-  }
-
-  function handleResize() {
-    const nowItemsPerSlide = getItemsPerSlide();
-    if (nowItemsPerSlide !== currentItemsPerSlide) {
-      currentItemsPerSlide = nowItemsPerSlide;
-      updateCarousel();
-    }
-  }
-
-  updateCarousel();
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(handleResize, 200);
+  mountResponsiveCarousel({
+    container: document.getElementById("members-carousel-container"),
+    carouselId: "members-carousel",
+    carouselClass: "members__carousel",
+    rowClass: "members__row",
+    ariaLabel: "Team members",
+    items: MEMBERS,
+    getItemsPerSlide,
+    renderItem,
   });
 }

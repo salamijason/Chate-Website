@@ -37,7 +37,6 @@ async function initVideosPage() {
   initializeSeriesController({
     defaultKey: DEFAULT_HASH,
     validKeys: VALID_HASHES,
-    buttons: {},
     getButtons: () => ({
       "su-tu-pyu": document.getElementById("su-tu-pyu-button"),
       "scholars-diaries": document.getElementById("scholars-diaries-button"),

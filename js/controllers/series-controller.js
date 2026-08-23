@@ -1,6 +1,6 @@
 /**
  * @file series-controller.js
- * @description Controller for managing the active series based on URL hash and renderSeriesing the corresponding content.
+ * @description Controller for managing the active series based on URL hash and rendering the corresponding content.
  * @module controllers/series-controller
  */
 
@@ -9,7 +9,7 @@ import { initializeLazyIframes } from "../utils/lazy-load.js";
 export function initializeSeriesController({
   defaultKey,
   validKeys,
-  buttons,
+  buttons = {},
   series,
   container,
   renderSeries,

@@ -119,7 +119,7 @@ export function renderNavbar(currentPath) {
         >
           <img
             class="site-header__logo"
-            src="/assets/logos/logo-transparent.webp"
+            src="assets/logos/logo-transparent.webp"
             alt="ချိတ်-The Hook"
           >
         </a>
