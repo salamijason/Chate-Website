@@ -4,7 +4,7 @@
  * @module services/blogger-api
  */
 
-import { BLOGGER_API_KEY } from "./blogger-api-key.js";
+import BLOGGER_API_KEY from "../../src/bloggerapikey.js";
 
 const BASE_URL = `https://www.googleapis.com/blogger/v3/blogs/136726928350551179/posts`;
 
