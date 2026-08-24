@@ -1,0 +1,89 @@
+/* Article Pagination */
+#article-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-10);
+}
+
+/* Item Range Label */
+.article-listing__range {
+  width: 100%;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+}
+
+/* Page Buttons */
+.article-listing__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.article-listing__page:hover,
+.article-listing__page:focus-visible {
+  border-color: var(--color-primary-strong);
+  color: var(--color-primary-strong);
+}
+
+.article-listing__page.is-active {
+  border-color: var(--color-primary-strong);
+  background-color: var(--color-primary-strong);
+  color: var(--color-text-inverse);
+}
+
+.article-listing__page.is-active:hover {
+  border-color: var(--color-primary-strong);
+  background-color: var(--color-primary-strong);
+  color: var(--color-text-inverse);
+}
+
+.article-listing__page:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.article-listing__page:disabled:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+/* Prev/Next Arrows */
+.article-listing__page--arrow {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Responsive */
+@media (max-width: 575.98px) {
+  .article-listing__page {
+    min-width: 2.25rem;
+    height: 2.25rem;
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .article-listing__page {
+    transition: none;
+  }
+}

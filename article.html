@@ -3,41 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Articles - ချိတ်</title>
-    <link rel="canonical" href="https://chatethehook.com/articles.html" />
+    <title>Article - ချိတ်</title>
+    <link rel="canonical" href="https://chatethehook.com/article.html" />
     <meta
       name="description"
-      content="Scholarship guides, admissions advice, and testing tips for Myanmar students applying abroad."
+      content="Read the latest articles from ချိတ် - The Hook, covering scholarships, university admissions, and college application guidance for Myanmar students."
     />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/logos/favicon.ico" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Articles - ချိတ် - The Hook" />
+    <meta property="og:title" content="Article - ချိတ် - The Hook" />
     <meta
       property="og:description"
-      content="Scholarship guides, admissions advice, and testing tips for Myanmar students applying abroad."
+      content="Read the latest articles from ချိတ် - The Hook, covering scholarships, university admissions, and college application guidance for Myanmar students."
     />
     <meta
       property="og:image"
       content="https://chatethehook.com/assets/logos/og-preview.webp"
     />
-    <meta property="og:url" content="https://chatethehook.com/articles.html" />
-    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chatethehook.com/article.html" />
+    <meta property="og:type" content="article" />
     <meta property="og:locale" content="my_MM" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Articles - ချိတ် - The Hook" />
+    <meta name="twitter:title" content="Article - ချိတ် - The Hook" />
     <meta
       name="twitter:description"
-      content="Scholarship guides, admissions advice, and testing tips for Myanmar students applying abroad."
+      content="Read the latest articles from ချိတ် - The Hook, covering scholarships, university admissions, and college application guidance for Myanmar students."
     />
     <meta
       name="twitter:image"
       content="https://chatethehook.com/assets/logos/og-preview.webp"
     />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "dompurify": "https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.es.mjs"
+        }
+      }
+    </script>
 
     <!-- Bootstrap CSS -->
     <link
@@ -62,22 +70,14 @@
     <!-- Site Header -->
     <header id="navbar" class="site-header" data-component="navbar"></header>
 
-    <!-- Article Listing Panel (populated by articles.js) -->
-    <main class="article-listing series-panel">
-      <div id="article-heading"></div>
-      <div class="series-grid" id="article-cards"></div>
-      <nav
-        class="article-listing__pagination"
-        id="article-pagination"
-        aria-label="Article pages"
-      ></nav>
-    </main>
+    <!-- Article Reader Panel (populated by article.js) -->
+    <main id="article-reader" class="article-reader series-panel"></main>
 
     <!-- Site Footer -->
     <footer id="footer" class="site-footer" data-component="footer"></footer>
 
     <!-- Page-Specific Script -->
-    <script type="module" src="js/pages/articles.js"></script>
+    <script type="module" src="js/pages/article.js"></script>
 
     <!-- Third-Party Libraries -->
     <script

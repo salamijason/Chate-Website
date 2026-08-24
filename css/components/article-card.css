@@ -1,0 +1,102 @@
+/* Card */
+.article-card {
+  display: flex;
+}
+
+.article-card__link {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.article-card__link:hover,
+.article-card__link:focus-visible {
+  border-color: var(--color-primary-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.article-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background-color: var(--color-border);
+}
+
+.article-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-5);
+}
+
+.article-card__title {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.article-card__date {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}
+
+.article-card__labels {
+  margin: 0 0 var(--space-3);
+  color: var(--color-warning);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.article-card__action {
+  margin-top: auto;
+  color: var(--color-primary-strong);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.article-card__link:hover .article-card__action,
+.article-card__link:focus-visible .article-card__action {
+  color: var(--color-primary);
+}
+
+/* Responsive */
+@media (max-width: 1199.98px) {
+  #article-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 991.98px) {
+  #article-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  #article-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .article-card__link,
+  .article-card__action {
+    transition: none;
+  }
+}

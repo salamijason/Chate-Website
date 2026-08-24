@@ -5,6 +5,7 @@
  */
 
 import { initializeLazyIframes } from "../utils/lazy-load.js";
+import { resolveActiveKey } from "../utils/hash-routing.js";
 
 export function initializeSeriesController({
   defaultKey,
@@ -19,13 +20,8 @@ export function initializeSeriesController({
 
   let resolvedButtons = buttons; // Buttons currently used by the controller
 
-  function getActiveKey() {
-    const hash = location.hash.replace("#", "");
-    return validKeys.has(hash) ? hash : defaultKey;
-  }
-
   function update() {
-    const activeKey = getActiveKey();
+    const activeKey = resolveActiveKey(validKeys, defaultKey);
     container.innerHTML = renderSeries(series[activeKey]);
     resolvedButtons = getButtons?.() ?? buttons;
 

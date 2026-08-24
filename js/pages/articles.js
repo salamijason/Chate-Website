@@ -6,8 +6,11 @@
  */
 
 import { mountLayout } from "../components/layout.js";
+import { renderSeriesHeading } from "../components/series-heading.js";
+import { renderArticlePagination } from "../components/article-pagination.js";
 import { fetchArticles } from "../services/blogger-api.js";
 import { renderArticleCards } from "../components/article-card.js";
+import { resolveActiveKey } from "../utils/hash-routing.js";
 
 async function initArticlesPage() {
   try {
@@ -16,24 +19,23 @@ async function initArticlesPage() {
     console.error("Failed to mount layout:", err);
   }
 
-  const INITIAL_COUNT = 8;
-  const LOAD_MORE_COUNT = 8;
+  const PAGE_SIZE = 12;
   const DEFAULT_HASH = "scholarships";
 
-  const filterButtons = {
-    scholarships: document.getElementById("scholarships-button"),
-    "testing-and-curriculum": document.getElementById(
-      "testing-and-curriculum-button",
-    ),
-    uk: document.getElementById("uk-button"),
-    us: document.getElementById("us-button"),
-    "about-chate": document.getElementById("about-chate-button"),
-    "all-articles": document.getElementById("all-articles-button"),
-  };
+  const ARTICLE_FILTERS = [
+    { key: "scholarships", label: "Scholarships" },
+    { key: "testing-and-curriculum", label: "Testing & Curriculum" },
+    { key: "uk", label: "UK" },
+    { key: "us", label: "US" },
+    { key: "about-chate", label: "About ချိတ် - The Hook" },
+    { key: "all-articles", label: "All Articles" },
+  ];
 
-  const articlesPanel = document.getElementById("articles-panel");
-  const headerText = document.getElementById("articles-header-text");
-  const moreButton = document.getElementById("moreContent");
+  let filterButtons = {};
+
+  const articlesPanel = document.getElementById("article-cards");
+  const articleHeading = document.getElementById("article-heading");
+  const pagination = document.getElementById("article-pagination");
 
   const articleSeries = {
     scholarships: { label: "Scholarships", heading: "Scholarships" },
@@ -50,13 +52,10 @@ async function initArticlesPage() {
     "all-articles": { label: null, heading: "Articles" },
   };
 
-  let articles = [];
-  let nextPageToken = "";
-
-  function getActiveKey() {
-    const hash = location.hash.replace("#", "");
-    return articleSeries[hash] ? hash : DEFAULT_HASH;
-  }
+  let pages = [];
+  let totalItems = 0;
+  let requestVersion = 0;
+  let discoveryPromise = null;
 
   function highlightActiveButton(activeKey) {
     Object.entries(filterButtons).forEach(([key, button]) => {
@@ -64,43 +63,147 @@ async function initArticlesPage() {
     });
   }
 
-  async function loadPage(activeKey, { reset }) {
-    if (reset) {
-      articles = [];
-      nextPageToken = "";
-      articlesPanel.innerHTML = "";
-      moreButton.disabled = false;
-      headerText.textContent = articleSeries[activeKey].heading;
-    }
+  function renderHeading(activeKey) {
+    articleHeading.innerHTML = renderSeriesHeading({
+      titleMain: "All",
+      titleAccent: articleSeries[activeKey].heading,
+      filters: ARTICLE_FILTERS,
+    });
 
-    const { items = [], nextPageToken: newToken } = await fetchArticles({
-      maxResults: reset ? INITIAL_COUNT : LOAD_MORE_COUNT,
-      pageToken: nextPageToken,
+    filterButtons = Object.fromEntries(
+      ARTICLE_FILTERS.map(({ key }) => [
+        key,
+        document.getElementById(`${key}-button`),
+      ]),
+    );
+
+    highlightActiveButton(activeKey);
+
+    Object.entries(filterButtons).forEach(([key, button]) => {
+      button?.addEventListener("click", () => {
+        location.hash = key;
+      });
+    });
+  }
+
+  function renderPagination(activePage) {
+    const totalPages = totalItems
+      ? Math.ceil(totalItems / PAGE_SIZE)
+      : pages.length;
+    const startItem = activePage * PAGE_SIZE + 1;
+    const currentItems = pages[activePage]?.items || [];
+    const endItem = totalItems
+      ? Math.min((activePage + 1) * PAGE_SIZE, totalItems)
+      : startItem + currentItems.length - 1;
+    const displayedTotal = totalItems || endItem;
+
+    pagination.innerHTML = renderArticlePagination({
+      activePage,
+      totalPages,
+      startItem,
+      endItem,
+      displayedTotal,
+    });
+
+    pagination.querySelectorAll("[data-page]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showPage(Number(button.dataset.page), resolveActiveKey());
+      });
+    });
+  }
+
+  async function fetchPage(pageIndex, activeKey) {
+    const page = pages[pageIndex];
+
+    if (!page || page.items) return;
+
+    const response = await fetchArticles({
+      maxResults: PAGE_SIZE,
+      pageToken: page.token,
       label: articleSeries[activeKey].label,
     });
 
-    articles = articles.concat(items);
-    nextPageToken = newToken || "";
-    moreButton.disabled = !nextPageToken;
+    console.log(response);
 
-    articlesPanel.innerHTML = renderArticleCards(articles);
+    page.items = response.items || [];
+    page.nextToken = response.nextPageToken || "";
+
+    if (page.nextToken && !pages[pageIndex + 1]) {
+      pages.push({ token: page.nextToken });
+    }
   }
+
+  async function discoverRemainingPages(activeKey, expectedVersion) {
+    while (pages[pages.length - 1]?.nextToken) {
+      pages.push({ token: pages[pages.length - 1].nextToken });
+      await fetchPage(pages.length - 1, activeKey);
+
+      if (expectedVersion !== requestVersion) return;
+    }
+
+    totalItems = pages.reduce(
+      (count, page) => count + (page.items?.length || 0),
+      0,
+    );
+  }
+
+  async function showPage(pageIndex, activeKey) {
+    const currentRequestVersion = requestVersion;
+    const totalPages = totalItems ? Math.ceil(totalItems / PAGE_SIZE) : null;
+
+    if (
+      pageIndex < 0 ||
+      (totalPages && pageIndex >= totalPages) ||
+      (pageIndex >= pages.length && !pages[pages.length - 1]?.nextToken)
+    ) {
+      return;
+    }
+
+    while (!pages[pageIndex]?.items && pages.length <= pageIndex) {
+      await fetchPage(pages.length - 1, activeKey);
+
+      if (currentRequestVersion !== requestVersion) return;
+      if (!pages[pages.length - 1]?.nextToken && !pages[pageIndex]) return;
+    }
+
+    await fetchPage(pageIndex, activeKey);
+
+    if (currentRequestVersion !== requestVersion || !pages[pageIndex]) return;
+
+    articlesPanel.innerHTML = renderArticleCards(pages[pageIndex].items);
+    renderPagination(pageIndex);
+
+    if (pageIndex === 0 && !discoveryPromise) {
+      discoveryPromise = discoverRemainingPages(
+        activeKey,
+        currentRequestVersion,
+      )
+        .then(() => {
+          if (currentRequestVersion === requestVersion) {
+            renderPagination(pageIndex);
+          }
+        })
+        .finally(() => {
+          discoveryPromise = null;
+        });
+    }
+  }
+
+  const VALID_KEYS = new Set(Object.keys(articleSeries));
 
   function update() {
-    const activeKey = getActiveKey();
-    highlightActiveButton(activeKey);
-    loadPage(activeKey, { reset: true });
-  }
-
-  Object.entries(filterButtons).forEach(([key, button]) => {
-    button?.addEventListener("click", () => {
-      location.hash = key;
+    const activeKey = resolveActiveKey(VALID_KEYS, DEFAULT_HASH);
+    requestVersion += 1;
+    pages = [{ token: "" }];
+    totalItems = 0;
+    discoveryPromise = null;
+    renderHeading(activeKey);
+    pagination.innerHTML = "";
+    showPage(0, activeKey).catch((error) => {
+      console.error("Failed to load articles:", error);
+      articlesPanel.innerHTML = `<p class="series-state series-state--error">Articles could not be loaded right now.</p>`;
     });
-  });
-
-  moreButton.addEventListener("click", () => {
-    loadPage(getActiveKey(), { reset: false });
-  });
+  }
 
   window.addEventListener("hashchange", update);
   update();

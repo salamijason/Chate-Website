@@ -1,6 +1,6 @@
 /**
  * @file article-card.js
- * @description Renders the article card markup for a single Blogger article post, including the thumbnail, title, date, labels, and a button to open the modal.
+ * @description Renders article listing cards with links to the dedicated article reader page.
  * @module components/article-card
  */
 
@@ -8,25 +8,31 @@ import {
   formatDate,
   formatLabels,
   extractThumbnail,
+  escapeHtml,
 } from "../utils/article-utils.js";
-import { createArticleModal } from "./article-modal.js";
+import { wrapMyanmarScript } from "../utils/text-utils.js";
 
-function renderArticleCard(article, index) {
+function renderArticleCard(article) {
   const image = extractThumbnail(article.content);
   const date = formatDate(article.published);
   const labels = formatLabels(article.labels);
 
+  const title = wrapMyanmarScript(escapeHtml(article.title));
+  const safeDate = wrapMyanmarScript(escapeHtml(date));
+  const safeLabels = wrapMyanmarScript(escapeHtml(labels));
+
   return `
-    <div class="card border-0 article m-0 mx-0 col-12 col-sm-6 col-md-4 col-lg-3">
-      <img src="${image}" class="card-img-top rounded mt-2 mb-0" alt="${article.title}" loading="lazy" />
-      <div class="card-body">
-        <h5 class="card-title">${article.title}</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">${date}</h6>
-        <h6 class="card-subtitle mb-2 text-body-secondary">${labels}</h6>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#article-modal-${index}">Read</button>
-      </div>
-    </div>
-    ${createArticleModal(article, index)}
+    <article class="article-card">
+      <a class="article-card__link" href="article.html?id=${encodeURIComponent(article.id)}">
+        <img class="article-card__image" src="${escapeHtml(image)}" alt="${escapeHtml(article.title)}" loading="lazy" />
+        <div class="article-card__body">
+          <h2 class="article-card__title">${title}</h2>
+          <p class="article-card__date">${safeDate}</p>
+          <p class="article-card__labels">${safeLabels}</p>
+          <span class="article-card__action">Read article</span>
+        </div>
+      </a>
+    </article>
   `;
 }
 
