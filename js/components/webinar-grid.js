@@ -20,10 +20,17 @@ export function renderWebinarGrid(series) {
         mediaType: entry.mediaType,
         mediaSrc: entry.mediaSrc,
         title: entry.title,
-        metadata: entry.presenter
-          ? { label: "Presented by", value: entry.presenter }
-          : null,
-        secondary: entry.date,
+        details: [
+          {
+            text: entry.date,
+            className: "series-card__date",
+          },
+          {
+            text: entry.presenter,
+            label: "Presented by",
+            className: "series-card__metadata",
+          },
+        ],
         notes: entry.notes,
       }),
     )

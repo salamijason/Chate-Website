@@ -18,11 +18,17 @@ export function renderVideoGrid(series) {
       renderSeriesCard({
         mediaSrc: entry.videoSrc,
         title: entry.title,
-        metadata: {
-          label: entry.rolePrefix,
-          value: entry.personName,
-        },
-        secondary: entry.secondaryLine,
+        details: [
+          {
+            text: entry.rolePrefix,
+            value: entry.personName,
+            className: "series-card__metadata",
+          },
+          {
+            text: entry.secondaryLine,
+            className: "series-card__secondary",
+          },
+        ],
         notes: entry.notes,
       }),
     )

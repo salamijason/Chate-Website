@@ -10,8 +10,7 @@ export function renderSeriesCard({
   mediaType = "video",
   mediaSrc,
   title,
-  metadata,
-  secondary,
+  details = [],
   notes = [],
 }) {
   const mediaHtml =
@@ -27,12 +26,17 @@ export function renderSeriesCard({
           allowfullscreen
         ></iframe>`;
 
-  const metadataHtml = metadata
-    ? `<p class="series-card__metadata">${wrapMyanmarScript(metadata.label)} <span class="series-card__name">${wrapMyanmarScript(metadata.value)}</span></p>`
-    : "";
-  const secondaryHtml = secondary
-    ? `<p class="series-card__secondary">${wrapMyanmarScript(secondary)}</p>`
-    : "";
+  const detailsHtml = details
+    .filter((detail) => detail.text)
+    .map(
+      ({ text, label, value, className = "series-card__detail" }) => `
+      <p class="${className}">
+        ${label ? `${label} ` : ""}
+        ${value ? `${wrapMyanmarScript(text)} <span class="series-card__name">${wrapMyanmarScript(value)}</span>` : wrapMyanmarScript(text)}
+      </p>
+    `,
+    )
+    .join("");
   const notesHtml = notes
     .map(
       (note) => `<p class="series-card__note">${wrapMyanmarScript(note)}</p>`,
@@ -43,8 +47,7 @@ export function renderSeriesCard({
     <article class="series-card">
       <div class="series-card__frame">${mediaHtml}</div>
       <h2 class="series-card__title">${wrapMyanmarScript(title)}</h2>
-      ${metadataHtml}
-      ${secondaryHtml}
+      ${detailsHtml}
       ${notesHtml}
     </article>`;
 }
