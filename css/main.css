@@ -2,10 +2,10 @@
 @import "components/navbar.css";
 @import "components/footer.css";
 @import "components/hero.css";
+@import "components/carousel.css";
 @import "components/achievements.css";
 @import "components/how-it-works.css";
 @import "components/impact.css";
 @import "components/members.css";
 @import "components/faq.css";
-@import "components/video-grid.css";
-@import "components/carousel.css";
+@import "components/series.css";

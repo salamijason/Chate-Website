@@ -29,12 +29,6 @@ async function initEventsPage() {
 
   const eventsPanel = document.getElementById("events-panel");
 
-  const seriesButtons = {
-    "above-and-beyond": document.getElementById("above-and-beyond-button"),
-    "stepping-stone": document.getElementById("stepping-stone-button"),
-    "kyaung-shaut": document.getElementById("kyaung-shaut-button"),
-  };
-
   const eventSeries = {
     "above-and-beyond": {
       titleMain: "Above & Beyond",
@@ -56,10 +50,14 @@ async function initEventsPage() {
   initializeSeriesController({
     defaultKey: DEFAULT_HASH,
     validKeys: VALID_HASHES,
-    buttons: seriesButtons,
     series: eventSeries,
     container: eventsPanel,
     renderSeries: renderWebinarGrid,
+    getButtons: () => ({
+      "above-and-beyond": document.getElementById("above-and-beyond-button"),
+      "stepping-stone": document.getElementById("stepping-stone-button"),
+      "kyaung-shaut": document.getElementById("kyaung-shaut-button"),
+    }),
   });
 }
 
