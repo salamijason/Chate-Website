@@ -286,7 +286,9 @@ class SpecialFooter extends HTMLElement {
                     <div class="col-2 mt-5" >
                         <br \>
                         <h3 class="fw-medium"> Events </h3>
+
                         <a class="footer-link" target="_self" href="/advising.html"><p class="m-0">Advising</p></a>
+                        <a class="footer-link" target="_self" href="/events.html#WhiteCoat"><p class="m-0"> White Coat Memoirs </p></a>
                         <a class="footer-link" target="_self" href="/events.html#AboveBeyond"><p class="m-0"> Above & Beyond </p></a>
                         <a class="footer-link" target="_self" href="/events.html#SteppingStone"><p class="m-0"> Stepping Stone </p></a>
                         <a class="footer-link" target="_self" href="/events.html#KyaungShaut"><p class="m-0"> ကျောင်းလျှောက်ကြမယ် </p></a>

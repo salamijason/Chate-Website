@@ -1,4 +1,108 @@
 // actual content html
+let whiteCoatContent = `
+  <div
+      class="justify-content-center p-2 d-flex"
+      style="padding-right: 50px"
+  >
+    <h1 class="text-center">
+    White Coat Memoirs (“ဆေးကျောင်းဆီသို”)
+      <span class="textaccent text-center">Webinars</span>
+    </h1>
+
+  </div>
+
+  <div class="row p-2">
+
+
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe src="https://www.youtube.com/embed/wuw3mEO9kns?si=5vaJIxZArT8562BM"
+        class="responsive-iframe"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Australia)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">31/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Phoo Pwint Thaung Sein (Alexis)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 5</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe src="https://www.youtube.com/embed/OXQEgHmfm6k?si=5eEekROoH7fdBhg8"
+        class="responsive-iframe"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Italy)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">29/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Ei Myat Phyu Sin & Nay Chi Ye Moe</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 4</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe src="https://www.youtube.com/embed/29LBoWnpLcY?si=oQb1QQQ2c70V1rnQ"
+        class="responsive-iframe"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Poland)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">27/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">May Thet Khine</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 3</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe src="https://www.youtube.com/embed/G1U6uyZFj_c?si=NF3qmsuSFyqbZkw8"
+        class="responsive-iframe"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Ireland)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">24/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Moe Yan Lin (Steven)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 2</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe src="https://www.youtube.com/embed/lMVZOj1_WzY?si=ysW2ZU5_O7-wGrWX"
+        class="responsive-iframe"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+      </iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Japan)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">21/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Win Soe Moe (Dennis)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 1</p>
+    </div>
+
+
+  </div>
+`;
 let aboveBeyondContent = `
     <div
         class="justify-content-center p-2 d-flex"
@@ -745,6 +849,7 @@ let kyaungShautContent = `
 `;
 
 // button identifiers
+let whiteCoatButton = document.querySelector('#whitecoat-button')
 let aboveBeyondButton = document.querySelector(`#abovebeyond-button`);
 let steppingStoneButton = document.querySelector(`#steppingstone-button`);
 let kyaungshautButton = document.querySelector(`#kyaungshaut-button`);
@@ -753,14 +858,24 @@ let kyaungshautButton = document.querySelector(`#kyaungshaut-button`);
 let eventsSection = document.querySelector(`#events-panel`);
 
 // first content that is initialized
-eventsSection.innerHTML = aboveBeyondContent;
+eventsSection.innerHTML = whiteCoatContent;
 
 // changing content as page reloads
-if (window.location.href.indexOf("AboveBeyond") > -1) {
+if (window.location.href.indexOf("WhiteCoat") > -1) {
+  console.log(`wh is true`);
+  eventsSection.innerHTML = whiteCoatContent;
+
+  // clicking and unclicking buttons
+  whiteCoatButton.classList.add('clicked');
+  aboveBeyondButton.classList.remove(`clicked`);
+  steppingStoneButton.classList.remove(`clicked`);
+  kyaungshautButton.classList.remove(`clicked`);
+} else if (window.location.href.indexOf("AboveBeyond") > -1) {
   console.log(`ab is true`);
   eventsSection.innerHTML = aboveBeyondContent;
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.remove('clicked');
   aboveBeyondButton.classList.add(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -769,6 +884,7 @@ if (window.location.href.indexOf("AboveBeyond") > -1) {
   eventsSection.innerHTML = steppingStoneContent;
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.remove('clicked');
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.add(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -777,26 +893,39 @@ if (window.location.href.indexOf("AboveBeyond") > -1) {
   eventsSection.innerHTML = kyaungShautContent;
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.remove('clicked');
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.add(`clicked`);
-} else if (window.location.href.indexOf("SuTuPyu") > -1) {
-  console.log(`stp is true`);
-  eventsSection.innerHTML = suTuPyuContent;
+}
+
+// changes when labels are changed on events page
+
+// WhiteCoat button changes
+function changeURLToWhiteCoat(event) {
+  event.preventDefault();
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.add(`clicked`);
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
-}
 
-// changes when labels are changed on events paged
+  //editing url
+  window.history.pushState(
+    { additionalInformation: "Updated the URL with JS" },
+    "WhiteCoat",
+    "/events.html#WhiteCoat",
+  );
+  eventsSection.innerHTML = whiteCoatContent;
+}
 
 // AboveBeyond button changes
 function changeURLToAboveBeyond(event) {
   event.preventDefault();
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.remove(`clicked`);
   aboveBeyondButton.classList.add(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -815,6 +944,7 @@ function changeURLToSteppingStone(event) {
   event.preventDefault();
 
   // clicking and unclicking buttons
+  whiteCoatButton.classList.remove(`clicked`);
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.add(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -833,6 +963,7 @@ function changeURLToKyaungShaut(event) {
   event.preventDefault();
 
   //clicking and unclicking buttons
+  whiteCoatButton.classList.remove(`clicked`);
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.add(`clicked`);
@@ -847,6 +978,7 @@ function changeURLToKyaungShaut(event) {
 }
 
 // for clicking on the labels on the events page
+whiteCoatButton.addEventListener('click', changeURLToWhiteCoat);
 aboveBeyondButton.addEventListener(`click`, changeURLToAboveBeyond);
 steppingStoneButton.addEventListener(`click`, changeURLToSteppingStone);
 kyaungshautButton.addEventListener(`click`, changeURLToKyaungShaut);
