@@ -14,6 +14,26 @@ import {
 } from "../utils/article-utils.js";
 import { wrapMyanmarScript } from "../utils/text-utils.js";
 
+const BACK_LINK_HTML = `
+  <a class="article-reader__back" href="/articles.html">
+    <span class="article-reader__back-icon" aria-hidden="true">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M19 12H5" />
+        <path d="M12 19l-7-7 7-7" />
+      </svg>
+    </span>
+    All Articles
+  </a>
+`;
+
 async function initArticlePage() {
   try {
     await mountLayout();
@@ -51,19 +71,27 @@ async function initArticlePage() {
 }
 
 function renderState(panel, message, modifier) {
-  panel.innerHTML = `<p class="series-state series-state--${modifier}">${escapeHtml(message)}</p>`;
+  panel.innerHTML = `
+    <div class="article-reader__article">
+      <p class="series-state series-state--${modifier}">${escapeHtml(message)}</p>
+    </div>
+  `;
 }
 
 function renderArticle(panel, article) {
   const title = wrapMyanmarScript(escapeHtml(article.title));
   const date = wrapMyanmarScript(escapeHtml(formatDate(article.published)));
   const labels = wrapMyanmarScript(escapeHtml(formatLabels(article.labels)));
-  const safeContent = DOMPurify.sanitize(article.content, {
+
+  const sanitizedContent = DOMPurify.sanitize(article.content, {
     ADD_ATTR: ["target", "rel"],
+    FORBID_ATTR: ["style"],
   });
+  const safeContent = wrapMyanmarScript(sanitizedContent);
 
   panel.innerHTML = `
     <article class="article-reader__article">
+      ${BACK_LINK_HTML}
       <header class="article-reader__header">
         <h1 class="article-reader__title">${title}</h1>
         <p class="article-reader__date">${date}</p>
