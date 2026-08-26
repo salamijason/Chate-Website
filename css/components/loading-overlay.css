@@ -1,0 +1,40 @@
+/* Page Loading Overlay */
+.page-loading-overlay {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-surface-accent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Hidden State */
+.page-loading-overlay[hidden] {
+  display: none;
+}
+
+/* Spinner */
+.page-loading-overlay__spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--color-border-strong);
+  border-top-color: var(--color-primary-strong);
+  border-radius: var(--radius-full);
+  animation: page-loading-spin 0.8s linear infinite;
+}
+
+/* Animation */
+@keyframes page-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-loading-overlay__spinner {
+    animation: none;
+  }
+}

@@ -11,12 +11,26 @@ export function renderArticlePagination({
   endItem,
   displayedTotal,
 }) {
-  const pageButtonsHtml = Array.from(
-    { length: totalPages },
-    (_, index) => index,
-  )
-    .map(
-      (index) => `
+  if (totalPages <= 1) return "";
+
+  const pageIndexes = new Set([0, totalPages - 1]);
+  const windowStart = Math.max(0, activePage - 2);
+  const windowEnd = Math.min(totalPages - 1, activePage + 2);
+
+  for (let index = windowStart; index <= windowEnd; index += 1) {
+    pageIndexes.add(index);
+  }
+
+  const pageButtonsHtml = Array.from(pageIndexes)
+    .sort((first, second) => first - second)
+    .map((index, position, indexes) => {
+      const previousIndex = indexes[position - 1];
+      const separator =
+        previousIndex !== undefined && index - previousIndex > 1
+          ? `<span class="article-listing__ellipsis" aria-hidden="true">…</span>`
+          : "";
+
+      return `${separator}
       <button
         type="button"
         class="article-listing__page${index === activePage ? " is-active" : ""}"
@@ -25,9 +39,37 @@ export function renderArticlePagination({
         aria-current="${index === activePage ? "page" : "false"}"
       >
         ${index + 1}
-      </button>`,
-    )
+      </button>`;
+    })
     .join("");
+
+  const prevIconHtml = `
+    <svg
+      class="article-listing__page-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>`;
+
+  const nextIconHtml = `
+    <svg
+      class="article-listing__page-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9 18l6-6-6-6" />
+    </svg>`;
 
   return `
     <span class="article-listing__range">
@@ -39,7 +81,7 @@ export function renderArticlePagination({
       data-page="${activePage - 1}"
       aria-label="Previous article page"
       ${activePage === 0 ? "disabled" : ""}
-    >&lsaquo;</button>
+    >${prevIconHtml}</button>
     ${pageButtonsHtml}
     <button
       type="button"
@@ -47,5 +89,5 @@ export function renderArticlePagination({
       data-page="${activePage + 1}"
       aria-label="Next article page"
       ${activePage >= totalPages - 1 ? "disabled" : ""}
-    >&rsaquo;</button>`;
+    >${nextIconHtml}</button>`;
 }

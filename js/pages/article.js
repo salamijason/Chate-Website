@@ -6,6 +6,10 @@
 
 import DOMPurify from "dompurify";
 import { mountLayout } from "../components/layout.js";
+import {
+  hideLoadingOverlay,
+  showLoadingOverlay,
+} from "../components/loading-overlay.js";
 import { fetchArticle } from "../services/blogger-api.js";
 import {
   formatDate,
@@ -35,6 +39,8 @@ const BACK_LINK_HTML = `
 `;
 
 async function initArticlePage() {
+  showLoadingOverlay();
+
   try {
     await mountLayout();
   } catch (err) {
@@ -49,10 +55,11 @@ async function initArticlePage() {
 
   if (!articleId) {
     renderState(panel, "No article was specified.", "error");
+    hideLoadingOverlay();
     return;
   }
 
-  renderState(panel, "Loading article…", "loading");
+  renderState(panel);
 
   try {
     const article = await fetchArticle(articleId);
@@ -64,9 +71,11 @@ async function initArticlePage() {
 
     renderArticle(panel, article);
     updateTabTitle(article);
+    hideLoadingOverlay();
   } catch (err) {
     console.error("Failed to load article:", err);
     renderState(panel, "This article could not be loaded right now.", "error");
+    hideLoadingOverlay();
   }
 }
 

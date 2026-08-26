@@ -16,7 +16,6 @@ function renderArticleCard(article) {
   const image = extractThumbnail(article.content);
   const date = formatDate(article.published);
   const labels = formatLabels(article.labels);
-
   const title = wrapMyanmarScript(escapeHtml(article.title));
   const safeDate = wrapMyanmarScript(escapeHtml(date));
   const safeLabels = wrapMyanmarScript(escapeHtml(labels));

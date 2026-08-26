@@ -1,11 +1,14 @@
 /**
  * @file articles.js
- * @description Controller for the Articles page — wires the Blogger API service,
- * the article-card component, filter buttons, "load more" pagination, and hash routing.
+ * @description Controller for the Articles page — wires the Blogger API service, the article-card component, filter buttons, "load more" pagination, and hash routing.
  * @module pages/articles
  */
 
 import { mountLayout } from "../components/layout.js";
+import {
+  hideLoadingOverlay,
+  showLoadingOverlay,
+} from "../components/loading-overlay.js";
 import { renderSeriesHeading } from "../components/series-heading.js";
 import { renderArticlePagination } from "../components/article-pagination.js";
 import { fetchArticles } from "../services/blogger-api.js";
@@ -27,11 +30,9 @@ async function initArticlesPage() {
     { key: "testing-and-curriculum", label: "Testing & Curriculum" },
     { key: "uk", label: "UK" },
     { key: "us", label: "US" },
-    { key: "about-chate", label: "About ချိတ် - The Hook" },
+    { key: "about-chate", label: "About ချိတ်" },
     { key: "all-articles", label: "All Articles" },
   ];
-
-  let filterButtons = {};
 
   const articlesPanel = document.getElementById("article-cards");
   const articleHeading = document.getElementById("article-heading");
@@ -52,16 +53,12 @@ async function initArticlesPage() {
     "all-articles": { label: null, heading: "Articles" },
   };
 
+  const VALID_KEYS = new Set(Object.keys(articleSeries));
+
   let pages = [];
   let totalItems = 0;
   let requestVersion = 0;
   let discoveryPromise = null;
-
-  function highlightActiveButton(activeKey) {
-    Object.entries(filterButtons).forEach(([key, button]) => {
-      button?.classList.toggle("clicked", key === activeKey);
-    });
-  }
 
   function renderHeading(activeKey) {
     articleHeading.innerHTML = renderSeriesHeading({
@@ -70,16 +67,9 @@ async function initArticlesPage() {
       filters: ARTICLE_FILTERS,
     });
 
-    filterButtons = Object.fromEntries(
-      ARTICLE_FILTERS.map(({ key }) => [
-        key,
-        document.getElementById(`${key}-button`),
-      ]),
-    );
-
-    highlightActiveButton(activeKey);
-
-    Object.entries(filterButtons).forEach(([key, button]) => {
+    ARTICLE_FILTERS.forEach(({ key }) => {
+      const button = document.getElementById(`${key}-button`);
+      button?.classList.toggle("clicked", key === activeKey);
       button?.addEventListener("click", () => {
         location.hash = key;
       });
@@ -107,7 +97,10 @@ async function initArticlesPage() {
 
     pagination.querySelectorAll("[data-page]").forEach((button) => {
       button.addEventListener("click", () => {
-        showPage(Number(button.dataset.page), resolveActiveKey());
+        showPage(
+          Number(button.dataset.page),
+          resolveActiveKey(VALID_KEYS, DEFAULT_HASH),
+        );
       });
     });
   }
@@ -123,8 +116,6 @@ async function initArticlesPage() {
       label: articleSeries[activeKey].label,
     });
 
-    console.log(response);
-
     page.items = response.items || [];
     page.nextToken = response.nextPageToken || "";
 
@@ -134,8 +125,7 @@ async function initArticlesPage() {
   }
 
   async function discoverRemainingPages(activeKey, expectedVersion) {
-    while (pages[pages.length - 1]?.nextToken) {
-      pages.push({ token: pages[pages.length - 1].nextToken });
+    while (pages[pages.length - 1] && !pages[pages.length - 1].items) {
       await fetchPage(pages.length - 1, activeKey);
 
       if (expectedVersion !== requestVersion) return;
@@ -172,6 +162,7 @@ async function initArticlesPage() {
 
     articlesPanel.innerHTML = renderArticleCards(pages[pageIndex].items);
     renderPagination(pageIndex);
+    hideLoadingOverlay();
 
     if (pageIndex === 0 && !discoveryPromise) {
       discoveryPromise = discoverRemainingPages(
@@ -189,9 +180,8 @@ async function initArticlesPage() {
     }
   }
 
-  const VALID_KEYS = new Set(Object.keys(articleSeries));
-
   function update() {
+    showLoadingOverlay();
     const activeKey = resolveActiveKey(VALID_KEYS, DEFAULT_HASH);
     requestVersion += 1;
     pages = [{ token: "" }];
@@ -202,6 +192,7 @@ async function initArticlesPage() {
     showPage(0, activeKey).catch((error) => {
       console.error("Failed to load articles:", error);
       articlesPanel.innerHTML = `<p class="series-state series-state--error">Articles could not be loaded right now.</p>`;
+      hideLoadingOverlay();
     });
   }
 

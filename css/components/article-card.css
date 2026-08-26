@@ -1,3 +1,10 @@
+/* Article Cards Grid */
+#article-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
 /* Card */
 .article-card {
   display: flex;
@@ -28,7 +35,7 @@
 .article-card__image {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   background-color: var(--color-border);
 }
@@ -55,8 +62,8 @@
 }
 
 .article-card__labels {
-  margin: 0 0 var(--space-3);
-  color: var(--color-warning);
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-subtle);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }

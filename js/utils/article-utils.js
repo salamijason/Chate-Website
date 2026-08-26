@@ -10,6 +10,7 @@ export function formatDate(date) {
   return date?.substring(0, 10) ?? "";
 }
 
+// To protect XSS (Cross-Site Scripting) attack
 export function escapeHtml(value = "") {
   return String(value).replace(
     /[&<>'"]/g,
