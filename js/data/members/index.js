@@ -49,9 +49,9 @@ export const MEMBERS = [
     role: "COO & General Advisor",
   },
   {
-    filename: "shwe-eain-lin.webp",
-    alt: "Shwe Eain Lin",
-    name: "Shwe Eain Lin",
+    filename: "shwe-eain-linn.webp",
+    alt: "Shwe Eain Linn",
+    name: "Shwe Eain Linn",
     role: "Head of Research",
   },
   {

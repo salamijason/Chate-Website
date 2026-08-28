@@ -334,6 +334,7 @@ ol {
 
 .btn-primary {
   background-color: var(--color-primary-strong);
+  border: none;
   color: var(--color-text-inverse);
 }
 

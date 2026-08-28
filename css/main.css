@@ -13,3 +13,6 @@
 @import "components/article-card.css";
 @import "components/article-pagination.css";
 @import "components/loading-overlay.css";
+@import "components/advising.css";
+@import "components/advisor-card.css";
+@import "components/advisor-modal.css";
