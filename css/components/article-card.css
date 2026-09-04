@@ -80,6 +80,61 @@
   color: var(--color-primary);
 }
 
+/* Skeleton Loading State */
+@keyframes article-card-skeleton-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.article-card--skeleton .article-card__link:hover {
+  border-color: var(--color-border);
+  box-shadow: none;
+  transform: none;
+}
+
+.article-card__skeleton-image,
+.article-card__skeleton-line,
+.article-card__skeleton-action {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-surface-accent) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--radius-sm);
+  animation: article-card-skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.article-card__skeleton-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+}
+
+.article-card__skeleton-line {
+  width: 100%;
+  height: 0.875rem;
+  margin-bottom: var(--space-2);
+}
+
+.article-card__skeleton-line--title {
+  width: 85%;
+  height: 1.125rem;
+  margin-bottom: var(--space-3);
+}
+
+.article-card__skeleton-line--short {
+  width: 55%;
+}
+
+.article-card__skeleton-action {
+  width: 40%;
+  height: 0.875rem;
+  margin-top: auto;
+}
+
 /* Responsive */
 @media (max-width: 1199.98px) {
   #article-cards {

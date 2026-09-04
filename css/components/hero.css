@@ -9,8 +9,8 @@
   color: var(--color-text);
   background: linear-gradient(
     to bottom,
-    var(--color-surface) 0%,
-    var(--color-surface) 55%,
+    var(--color-surface-accent) 0%,
+    var(--color-surface-accent) 55%,
     var(--color-primary) 100%
   );
 }

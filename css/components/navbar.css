@@ -5,7 +5,7 @@
   left: 0;
   z-index: var(--z-sticky);
   width: 100%;
-  background-color: var(--color-surface);
+  background-color: var(--color-surface-accent);
   border-bottom: 1px solid transparent;
   transition:
     top var(--transition-base),

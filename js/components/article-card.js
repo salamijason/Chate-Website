@@ -38,3 +38,26 @@ function renderArticleCard(article) {
 export function renderArticleCards(articles) {
   return articles.map(renderArticleCard).join("");
 }
+
+/**
+ * Renders placeholder article cards to show while articles are being
+ * fetched from the Blogger API. Purely decorative — hidden from screen readers.
+ */
+export function renderArticleCardSkeletons(count = 12) {
+  return Array.from(
+    { length: count },
+    () => `
+      <article class="article-card article-card--skeleton" aria-hidden="true">
+        <div class="article-card__link">
+          <div class="article-card__skeleton-image"></div>
+          <div class="article-card__body">
+            <div class="article-card__skeleton-line article-card__skeleton-line--title"></div>
+            <div class="article-card__skeleton-line"></div>
+            <div class="article-card__skeleton-line article-card__skeleton-line--short"></div>
+            <div class="article-card__skeleton-action"></div>
+          </div>
+        </div>
+      </article>
+    `,
+  ).join("");
+}

@@ -2,6 +2,11 @@
 .series-panel {
   width: 100%;
   padding-block: var(--section-spacing);
+  background: linear-gradient(
+    180deg,
+    var(--color-surface-accent) 0%,
+    var(--color-background) 100%
+  );
 }
 
 /* Series Heading */

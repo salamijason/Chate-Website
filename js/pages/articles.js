@@ -5,15 +5,54 @@
  */
 
 import { mountLayout } from "../components/layout.js";
-import {
-  hideLoadingOverlay,
-  showLoadingOverlay,
-} from "../components/loading-overlay.js";
+import { hideLoadingOverlay } from "../components/loading-overlay.js";
 import { renderSeriesHeading } from "../components/series-heading.js";
-import { renderArticlePagination } from "../components/article-pagination.js";
 import { fetchArticles } from "../services/blogger-api.js";
-import { renderArticleCards } from "../components/article-card.js";
+import {
+  renderArticleCards,
+  renderArticleCardSkeletons,
+} from "../components/article-card.js";
 import { resolveActiveKey } from "../utils/hash-routing.js";
+import { renderArticlePagination } from "../components/article-pagination.js";
+
+const ARTICLES_VISITED_KEY = "articles-page-visited";
+const ARTICLES_CACHE_KEY = "articles-page-cache";
+const ARTICLES_CACHE_TTL = 10 * 60 * 1000;
+
+function hasVisitedArticlesPage() {
+  return sessionStorage.getItem(ARTICLES_VISITED_KEY) === "true";
+}
+
+function markArticlesPageVisited() {
+  sessionStorage.setItem(ARTICLES_VISITED_KEY, "true");
+}
+
+function readArticlesCache() {
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(ARTICLES_CACHE_KEY));
+
+    if (!cached || Date.now() - cached.timestamp > ARTICLES_CACHE_TTL) {
+      return {};
+    }
+
+    return cached.itemsByKey || {};
+  } catch {
+    return {};
+  }
+}
+
+function writeArticlesCache(activeKey, items) {
+  const itemsByKey = readArticlesCache();
+  itemsByKey[activeKey] = items;
+
+  sessionStorage.setItem(
+    ARTICLES_CACHE_KEY,
+    JSON.stringify({
+      itemsByKey,
+      timestamp: Date.now(),
+    }),
+  );
+}
 
 async function initArticlesPage() {
   try {
@@ -160,9 +199,12 @@ async function initArticlesPage() {
 
     if (currentRequestVersion !== requestVersion || !pages[pageIndex]) return;
 
-    articlesPanel.innerHTML = renderArticleCards(pages[pageIndex].items);
+    const items = pages[pageIndex].items;
+    articlesPanel.innerHTML = renderArticleCards(items);
+    writeArticlesCache(activeKey, items);
     renderPagination(pageIndex);
     hideLoadingOverlay();
+    markArticlesPageVisited();
 
     if (pageIndex === 0 && !discoveryPromise) {
       discoveryPromise = discoverRemainingPages(
@@ -181,14 +223,25 @@ async function initArticlesPage() {
   }
 
   function update() {
-    showLoadingOverlay();
     const activeKey = resolveActiveKey(VALID_KEYS, DEFAULT_HASH);
+    const cachedItems = readArticlesCache()[activeKey];
+    const shouldShowSkeletons = !cachedItems || !hasVisitedArticlesPage();
+
+    if (cachedItems && !shouldShowSkeletons) {
+      articlesPanel.innerHTML = renderArticleCards(cachedItems);
+    } else {
+      articlesPanel.innerHTML = renderArticleCardSkeletons(PAGE_SIZE);
+    }
+
+    pagination.innerHTML = "";
+
     requestVersion += 1;
     pages = [{ token: "" }];
     totalItems = 0;
     discoveryPromise = null;
+
     renderHeading(activeKey);
-    pagination.innerHTML = "";
+
     showPage(0, activeKey).catch((error) => {
       console.error("Failed to load articles:", error);
       articlesPanel.innerHTML = `<p class="series-state series-state--error">Articles could not be loaded right now.</p>`;
