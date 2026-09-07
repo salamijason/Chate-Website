@@ -16,71 +16,15 @@ let whiteCoatContent = `
 
 
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
-      <iframe src="https://www.youtube.com/embed/wuw3mEO9kns?si=5vaJIxZArT8562BM"
-        class="responsive-iframe"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/f5XmBWufQQQ?si=2fdA1UpJhCmaoUX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       <h2 class="m-0">
-        White Coat Memoirs (Australia)&nbsp;
+        White Coat Memoirs (Canada)&nbsp;
         <span class="textaccent"
-        ><p class="d-inline m-0 text-right">31/07/2026</p></span
+        ><p class="d-inline m-0 text-right">19/07/2026</p></span
         >
       </h2>
-      <p class="textorange m-0">Phoo Pwint Thaung Sein (Alexis)</p>
-      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 5</p>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
-      <iframe src="https://www.youtube.com/embed/OXQEgHmfm6k?si=5eEekROoH7fdBhg8"
-        class="responsive-iframe"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
-      <h2 class="m-0">
-        White Coat Memoirs (Italy)&nbsp;
-        <span class="textaccent"
-        ><p class="d-inline m-0 text-right">29/07/2026</p></span
-        >
-      </h2>
-      <p class="textorange m-0">Ei Myat Phyu Sin & Nay Chi Ye Moe</p>
-      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 4</p>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
-      <iframe src="https://www.youtube.com/embed/29LBoWnpLcY?si=oQb1QQQ2c70V1rnQ"
-        class="responsive-iframe"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
-      <h2 class="m-0">
-        White Coat Memoirs (Poland)&nbsp;
-        <span class="textaccent"
-        ><p class="d-inline m-0 text-right">27/07/2026</p></span
-        >
-      </h2>
-      <p class="textorange m-0">May Thet Khine</p>
-      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 3</p>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
-      <iframe src="https://www.youtube.com/embed/G1U6uyZFj_c?si=NF3qmsuSFyqbZkw8"
-        class="responsive-iframe"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-      </iframe>
-      <h2 class="m-0">
-        White Coat Memoirs (Ireland)&nbsp;
-        <span class="textaccent"
-        ><p class="d-inline m-0 text-right">24/07/2026</p></span
-        >
-      </h2>
-      <p class="textorange m-0">Moe Yan Lin (Steven)</p>
-      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 2</p>
+      <p class="textorange m-0">Su Yamin Tun & Nyan Lin Kyaw</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 1</p>
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
@@ -97,10 +41,92 @@ let whiteCoatContent = `
         >
       </h2>
       <p class="textorange m-0">Win Soe Moe (Dennis)</p>
-      <p class="m-1">“ဆေးကျောင်းဆီသို” Episode 1</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 2</p>
     </div>
 
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/BGO96smeGg0?si=jFiLKNDnqLkWBZRW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (United States)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">22/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Thet Mon Kyaw-Henrique</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 3</p>
+    </div>
 
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/4A-UDOntpGA?si=biKnAiNZ1vj9c6Al" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (China)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">23/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Hsu Hnin San (Mane Zhang)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 4</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/G1U6uyZFj_c?si=WKWAiguKGEI7QN_M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Ireland)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">24/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Moe Yan Lin (Steven)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 5</p>
+    </div>
+
+  <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/29LBoWnpLcY?si=ffwEbGujPK7spHMZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Poland)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">27/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">May Thet Khine</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 6</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/OXQEgHmfm6k?si=2Edws2SzHytpik3Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Italy)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">29/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Ei Myat Phyu Sin & Nay Chi Ye Moe</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 7</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/wuw3mEO9kns?si=74iJtAkgdQQ65_3W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Australia)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">31/07/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Phoo Pwint Thaung Sein (Alexis)</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 8</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/5vUh_YX8G1Y?si=P0JuODN0cYtGF7Fb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        White Coat Memoirs (Germany)&nbsp;
+        <span class="textaccent"
+        ><p class="d-inline m-0 text-right">02/08/2026</p></span
+        >
+      </h2>
+      <p class="textorange m-0">Thae Myat Aung</p>
+      <p class="m-1">“ဆေးကျောင်းဆီသို့” Episode 9 </p>
+    </div>
   </div>
 `;
 let aboveBeyondContent = `
@@ -849,7 +875,7 @@ let kyaungShautContent = `
 `;
 
 // button identifiers
-let whiteCoatButton = document.querySelector('#whitecoat-button')
+let whiteCoatButton = document.querySelector("#whitecoat-button");
 let aboveBeyondButton = document.querySelector(`#abovebeyond-button`);
 let steppingStoneButton = document.querySelector(`#steppingstone-button`);
 let kyaungshautButton = document.querySelector(`#kyaungshaut-button`);
@@ -866,7 +892,7 @@ if (window.location.href.indexOf("WhiteCoat") > -1) {
   eventsSection.innerHTML = whiteCoatContent;
 
   // clicking and unclicking buttons
-  whiteCoatButton.classList.add('clicked');
+  whiteCoatButton.classList.add("clicked");
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -875,7 +901,7 @@ if (window.location.href.indexOf("WhiteCoat") > -1) {
   eventsSection.innerHTML = aboveBeyondContent;
 
   // clicking and unclicking buttons
-  whiteCoatButton.classList.remove('clicked');
+  whiteCoatButton.classList.remove("clicked");
   aboveBeyondButton.classList.add(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -884,7 +910,7 @@ if (window.location.href.indexOf("WhiteCoat") > -1) {
   eventsSection.innerHTML = steppingStoneContent;
 
   // clicking and unclicking buttons
-  whiteCoatButton.classList.remove('clicked');
+  whiteCoatButton.classList.remove("clicked");
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.add(`clicked`);
   kyaungshautButton.classList.remove(`clicked`);
@@ -893,7 +919,7 @@ if (window.location.href.indexOf("WhiteCoat") > -1) {
   eventsSection.innerHTML = kyaungShautContent;
 
   // clicking and unclicking buttons
-  whiteCoatButton.classList.remove('clicked');
+  whiteCoatButton.classList.remove("clicked");
   aboveBeyondButton.classList.remove(`clicked`);
   steppingStoneButton.classList.remove(`clicked`);
   kyaungshautButton.classList.add(`clicked`);
@@ -978,7 +1004,7 @@ function changeURLToKyaungShaut(event) {
 }
 
 // for clicking on the labels on the events page
-whiteCoatButton.addEventListener('click', changeURLToWhiteCoat);
+whiteCoatButton.addEventListener("click", changeURLToWhiteCoat);
 aboveBeyondButton.addEventListener(`click`, changeURLToAboveBeyond);
 steppingStoneButton.addEventListener(`click`, changeURLToSteppingStone);
 kyaungshautButton.addEventListener(`click`, changeURLToKyaungShaut);
