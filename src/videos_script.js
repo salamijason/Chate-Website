@@ -75,6 +75,17 @@ let suTuPyuContent = `
 
   <div class="row p-2">
 
+ <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/o4Q-Co-C6x4?si=FDUQPfpV7XRwVIG5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <h2 class="m-0">
+        Cambridge Accepted Essay&nbsp;
+
+      </h2>
+      <p class="textorange m-0">Written by <span class="fw-bold">Swan Htet Nay Khaing</span></p>
+      <p class="textaccent m-1">Read by Yonn Yati Win</p>
+      <p class="m-1">"စုတုပြု" Video Series, Episode 15</p>
+    </div>
+
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 pb-3">
       <iframe src="https://www.youtube.com/embed/pYs7wKK-G3g?si=0E_42spWZ1Wta6vC"
             class="responsive-iframe"
